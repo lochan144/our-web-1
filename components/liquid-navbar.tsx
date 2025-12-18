@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
@@ -15,6 +15,48 @@ const navItems = [
 export function LiquidNavbar() {
   const [activeSection, setActiveSection] = useState("")
   const [isScrolled, setIsScrolled] = useState(false)
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+  const [hoverPillStyle, setHoverPillStyle] = useState({ left: 0, width: 0, opacity: 0 })
+  const [activePillStyle, setActivePillStyle] = useState({ left: 0, width: 0 })
+  const navRef = useRef<HTMLUListElement>(null)
+  const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
+
+  // Update active pill position when activeSection changes
+  useEffect(() => {
+    if (activeSection && buttonRefs.current[activeSection] && navRef.current) {
+      const button = buttonRefs.current[activeSection]
+      const nav = navRef.current
+      const buttonRect = button.getBoundingClientRect()
+      const navRect = nav.getBoundingClientRect()
+      
+      setActivePillStyle({
+        left: buttonRect.left - navRect.left,
+        width: buttonRect.width,
+      })
+    }
+  }, [activeSection])
+
+  // Handle hover pill movement
+  const handleMouseEnter = (itemId: string) => {
+    setHoveredItem(itemId)
+    if (buttonRefs.current[itemId] && navRef.current) {
+      const button = buttonRefs.current[itemId]
+      const nav = navRef.current
+      const buttonRect = button.getBoundingClientRect()
+      const navRect = nav.getBoundingClientRect()
+      
+      setHoverPillStyle({
+        left: buttonRect.left - navRect.left,
+        width: buttonRect.width,
+        opacity: 1,
+      })
+    }
+  }
+
+  const handleMouseLeave = () => {
+    setHoveredItem(null)
+    setHoverPillStyle(prev => ({ ...prev, opacity: 0 }))
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,21 +118,47 @@ export function LiquidNavbar() {
         {/* Glass effect overlay */}
         <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
 
-        <ul className="flex items-center gap-1 relative z-10">
+        <ul 
+          ref={navRef}
+          className="flex items-center gap-1 relative z-10"
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* Fixed active section pill indicator */}
+          {activeSection && (
+            <div
+              className="absolute top-0 h-full rounded-full bg-white/20 pointer-events-none transition-all duration-500 ease-out"
+              style={{
+                left: activePillStyle.left,
+                width: activePillStyle.width,
+                transform: 'translateY(0)',
+              }}
+            />
+          )}
+
+          {/* Floating hover glass pill */}
+          <div
+            className="absolute top-0 h-full rounded-full pointer-events-none backdrop-blur-md bg-gradient-to-b from-white/30 to-white/10 shadow-lg shadow-white/20"
+            style={{
+              left: hoverPillStyle.left,
+              width: hoverPillStyle.width,
+              opacity: hoverPillStyle.opacity,
+              transform: 'translateY(0)',
+              transition: 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease-out',
+            }}
+          />
+
           {navItems.map((item) => (
             <li key={item.id}>
               <button
+                ref={(el) => { buttonRefs.current[item.id] = el }}
                 onClick={() => scrollToSection(item.id)}
+                onMouseEnter={() => handleMouseEnter(item.id)}
                 className={cn(
-                  "relative px-6 py-2.5 rounded-full text-xl font-medium transition-all duration-300",
-                  "hover:bg-white/10",
-                  activeSection === item.id ? "text-white bg-white/20" : "text-white/70",
+                  "relative px-6 py-2.5 rounded-full text-xl font-medium transition-colors duration-300",
+                  activeSection === item.id ? "text-white" : "text-white/70",
                 )}
               >
                 {item.label}
-                {activeSection === item.id && (
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/0 via-white/10 to-white/0 animate-pulse" />
-                )}
               </button>
             </li>
           ))}
