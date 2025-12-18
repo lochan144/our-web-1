@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
+import Link from "next/link"
 
 const navItems = [
   { id: "about", label: "About" },
@@ -108,13 +110,34 @@ export function LiquidNavbar() {
   }
 
   return (
-    <nav
-      className={cn(
-        "fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500",
-        isScrolled ? "top-4" : "top-6",
-      )}
-    >
-      <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-full px-8 py-4 shadow-2xl shadow-black/20">
+    <>
+      {/* Logo - fixed to the left corner */}
+      <Link 
+        href="/"
+        className={cn(
+          "fixed left-10 z-50 transition-all duration-500 hover:opacity-80",
+          isScrolled ? "top-4" : "top-6"
+        )}
+      >
+        <Image 
+          src="/logo-k.png" 
+          alt="Kunthive Logo" 
+          width={80} 
+          height={80}
+          className="w-auto object-contain"
+          style={{
+            height: 'calc(2rem + 2.5rem + 1.75rem)' // py-4 (2rem) + py-2.5 (1.25rem) + text-xl line-height (1.75rem)
+          }}
+        />
+      </Link>
+
+      <nav
+        className={cn(
+          "fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500",
+          isScrolled ? "top-4" : "top-6",
+        )}
+      >
+        <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-full px-8 py-4 shadow-2xl shadow-black/20">
         {/* Glass effect overlay */}
         <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
 
@@ -164,6 +187,7 @@ export function LiquidNavbar() {
           ))}
         </ul>
       </div>
-    </nav>
+      </nav>
+    </>
   )
 }
