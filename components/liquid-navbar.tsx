@@ -241,12 +241,13 @@ export function LiquidNavbar() {
             <Menu className="w-6 h-6 text-white" />
           </button>
           
-          <h1 
-            className="text-3xl font-bold text-white tracking-tight" 
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="text-3xl font-bold text-white tracking-tight hover:opacity-80 transition-opacity"
             style={{ fontFamily: "'Nature Beauty', serif" }}
           >
             Kunthive
-          </h1>
+          </button>
           
           <button
             onClick={() => scrollToSection('contact')}
