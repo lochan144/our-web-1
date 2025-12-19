@@ -3,6 +3,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: 'Nature Beauty';
+  src: url('/fonts/naturebeautypersonaluse-9Y2DK.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: oklch(0.08 0.02 270);
   --foreground: oklch(0.98 0 0);
