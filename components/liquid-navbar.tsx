@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Phone } from "lucide-react"
 
 const navItems = [
   { id: "about", label: "About" },
@@ -241,15 +241,20 @@ export function LiquidNavbar() {
             <Menu className="w-6 h-6 text-white" />
           </button>
           
-          <Link href="/" className="hover:opacity-80 transition-opacity">
-            <Image 
-              src="/logo-k.png" 
-              alt="Kunthive Logo" 
-              width={50} 
-              height={50}
-              className="w-auto h-12 object-contain"
-            />
-          </Link>
+          <h1 
+            className="text-3xl font-bold text-white tracking-tight" 
+            style={{ fontFamily: "'Nature Beauty', serif" }}
+          >
+            Kunthive
+          </h1>
+          
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+            aria-label="Contact"
+          >
+            <Phone className="w-6 h-6 text-white" />
+          </button>
         </div>
       </div>
 
