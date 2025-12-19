@@ -22,6 +22,7 @@ export function LiquidNavbar() {
   const [hoverPillStyle, setHoverPillStyle] = useState({ left: 0, width: 0, opacity: 0 })
   const [activePillStyle, setActivePillStyle] = useState({ left: 0, width: 0 })
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [showMobileBrand, setShowMobileBrand] = useState(false)
   const navRef = useRef<HTMLUListElement>(null)
   const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
 
@@ -65,6 +66,16 @@ export function LiquidNavbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+
+      // Mobile brand transition logic
+      const aboutSection = document.getElementById('about')
+      if (aboutSection) {
+        const aboutRect = aboutSection.getBoundingClientRect()
+        // Show brand when about section starts entering viewport (roughly when hero is scrolling out)
+        // Using a smooth transition threshold
+        const threshold = window.innerHeight * 0.7 // When about section is 30% into viewport
+        setShowMobileBrand(aboutRect.top < threshold)
+      }
 
       // Update active section based on scroll position
       const sections = navItems.map((item) => document.getElementById(item.id))
@@ -243,7 +254,10 @@ export function LiquidNavbar() {
           
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-3xl font-bold text-white tracking-tight hover:opacity-80 transition-opacity"
+            className={cn(
+              "text-3xl font-bold text-white tracking-tight hover:opacity-80 transition-all duration-500",
+              showMobileBrand ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+            )}
             style={{ fontFamily: "'Nature Beauty', serif" }}
           >
             Kunthive
