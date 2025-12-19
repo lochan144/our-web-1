@@ -15,7 +15,7 @@ export function HeroSection() {
     <section className="min-h-screen flex items-center justify-center px-6 pt-32">
       <div className="max-w-7xl mx-auto text-center">
         {/* Logo/Brand Name */}
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 tracking-tight">Kunthiv</h1>
+        <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 tracking-tight">Kunthive</h1>
 
         {/* Hero Message */}
         <p className="text-4xl md:text-6xl font-light text-white/90 mb-6 text-balance">Find the best developers here</p>

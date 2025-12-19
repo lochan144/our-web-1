@@ -11,7 +11,7 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: "Kunthiv - Find the Best Developers",
+  title: "Kunthive - Find the Best Developers",
   description: "Connecting you with exceptional development talent for perpetual growth and innovation",
   generator: "v0.app",
   icons: {

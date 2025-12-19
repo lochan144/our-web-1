@@ -47,7 +47,7 @@ export function ContactSection() {
 
         {/* Footer */}
         <div className="mt-16 pt-8 border-t border-white/10">
-          <p className="text-white/40 text-sm">© 2025 Kunthiv. All rights reserved.</p>
+          <p className="text-white/40 text-sm">© 2025 Kunthive. All rights reserved.</p>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 const testimonials = [
   {
-    quote: "Working with Kunthiv transformed our development process. Their developers are exceptional.",
+    quote: "Working with Kunthive transformed our development process. Their developers are exceptional.",
     author: "Sarah Chen",
     role: "CTO, TechCorp",
     company: "TechCorp Inc.",
@@ -12,7 +12,7 @@ const testimonials = [
     company: "InnovateLabs",
   },
   {
-    quote: "Kunthiv helped us scale our engineering team quickly without compromising on quality.",
+    quote: "Kunthive helped us scale our engineering team quickly without compromising on quality.",
     author: "Emily Watson",
     role: "Engineering Manager",
     company: "StartupXYZ",
