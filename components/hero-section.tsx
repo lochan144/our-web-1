@@ -18,7 +18,7 @@ export function HeroSection() {
         <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 tracking-tight" style={{ fontFamily: "'Nature Beauty', serif" }}>Kunthive</h1>
 
         {/* Hero Message */}
-        <p className="text-4xl md:text-6xl font-light text-white/90 mb-6 text-balance">Find the best developers here</p>
+        <p className="text-4xl md:text-6xl font-light text-white/90 mb-6 text-balance italic">Find the best developers here</p>
 
         {/* Subheading */}
         <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed">

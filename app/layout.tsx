@@ -1,12 +1,23 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
-import { Space_Grotesk } from "next/font/google"
+import localFont from "next/font/local"
 import "./globals.css"
 
-const spaceGrotesk = Space_Grotesk({ 
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
+const aptos = localFont({
+  src: [
+    {
+      path: "../public/fonts/Aptos.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Aptos-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+  variable: "--font-aptos",
   display: "swap",
 })
 
@@ -40,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.variable} font-sans antialiased`}>
+      <body className={`${aptos.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>
